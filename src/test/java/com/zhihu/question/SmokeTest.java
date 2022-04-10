@@ -28,6 +28,6 @@ public class SmokeTest {
     void shoule_return_ok_when_request_endpoint_of_health() throws Exception {
         mockMvc.perform(get("/actuator/health").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.status").value("UlsP"));
+                .andExpect(jsonPath("$.status").value("UP"));
     }
 }
