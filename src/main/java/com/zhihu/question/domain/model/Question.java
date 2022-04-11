@@ -7,11 +7,6 @@ import javax.persistence.Id;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-/**
- * 问题实体类
- *
- * @author admin
- */
 @Entity
 public class Question {
 
