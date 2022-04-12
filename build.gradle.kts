@@ -34,7 +34,7 @@ java {
     }
 }
 
-checkstyle{
+checkstyle {
     maxWarnings = 0
     toolVersion = "10.0"
 }
@@ -44,4 +44,5 @@ tasks {
         useJUnitPlatform()
     }
 }
+
 

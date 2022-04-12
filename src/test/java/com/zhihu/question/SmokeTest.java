@@ -28,7 +28,7 @@ public class SmokeTest {
     }
 
     @Test
-    void shoule_return_ok_when_request_endpoint_of_health() throws Exception {
+    void should_return_ok_when_request_endpoint_of_health() throws Exception {
         mockMvc.perform(get("/actuator/health").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value("UP"));
