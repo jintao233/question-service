@@ -4,9 +4,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.Objects;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+/**
+ * @author admin
+ */
 @Entity
 public class Question {
 
@@ -58,5 +62,24 @@ public class Question {
 
     public void setDetail(String detail) {
         this.detail = detail;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Question question = (Question) o;
+        return questionerId.equals(question.questionerId)
+                && title.equals(question.title)
+                && Objects.equals(detail, question.detail);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(questionerId, title, detail);
     }
 }
