@@ -2,7 +2,6 @@ package com.zhihu.question.domain.model.entity;
 
 import com.zhihu.question.domain.model.vo.QuestionUpdatedRecord;
 import org.junit.jupiter.api.Test;
-
 import static com.zhihu.question.domain.model.vo.QuestionUpdatedRecord.UpdateType.CREATED;
 import static org.testcontainers.shaded.org.hamcrest.MatcherAssert.assertThat;
 import static org.testcontainers.shaded.org.hamcrest.Matchers.hasSize;
