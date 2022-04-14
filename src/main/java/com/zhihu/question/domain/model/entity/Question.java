@@ -105,17 +105,18 @@ public class Question {
             return false;
         }
         Question question = (Question) o;
+
         if (!(Objects.equals(id, question.id)
                 && Objects.equals(questionerId, question.questionerId)
                 && Objects.equals(title, question.title)
                 && Objects.equals(detail, question.detail))) {
             return false;
         }
-        if (question.getUpdatedRecords().size() != updatedRecords.size()) {
+        if (updatedRecords.size() != question.updatedRecords.size()) {
             return false;
         }
         for (int i = 0; i < updatedRecords.size(); i++) {
-            if (!updatedRecords.get(i).equals(question.getUpdatedRecords().get(i))) {
+            if (!Objects.equals(updatedRecords.get(i), question.updatedRecords.get(i))) {
                 return false;
             }
         }

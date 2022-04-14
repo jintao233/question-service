@@ -1,18 +1,17 @@
 package com.zhihu.question.domain.model.vo;
 
 import org.springframework.data.annotation.PersistenceConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 import static com.zhihu.question.domain.model.vo.QuestionUpdatedRecord.UpdateType.CREATED;
 import static com.zhihu.question.domain.model.vo.QuestionUpdatedRecord.UpdateType.DETAIL_EDIT;
 import static com.zhihu.question.domain.model.vo.QuestionUpdatedRecord.UpdateType.TITLE_EDIT;
+import static com.zhihu.question.utils.LocalDateTimes.currentTime;
 
 /**
  * @author admin
@@ -26,7 +25,6 @@ public class QuestionUpdatedRecord {
 
     private String updaterId;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updatedAt;
 
     private String reason;
@@ -68,7 +66,7 @@ public class QuestionUpdatedRecord {
      * @return 创建问题时的记录对象
      */
     public static QuestionUpdatedRecord ofCreated(String updaterId, String createTitle, String createDetail) {
-        return new QuestionUpdatedRecord(CREATED, updaterId, LocalDateTime.now(), null, createTitle,
+        return new QuestionUpdatedRecord(CREATED, updaterId, currentTime(), null, createTitle,
                 createDetail, null, null, null, null);
     }
 
@@ -82,7 +80,7 @@ public class QuestionUpdatedRecord {
      * @return 更新问题标题时的问题记录
      */
     public static QuestionUpdatedRecord ofTitleEdited(String updaterId, String editedTitle, String unEditedTitle, String reason) {
-        return new QuestionUpdatedRecord(TITLE_EDIT, updaterId, LocalDateTime.now(), reason, null,
+        return new QuestionUpdatedRecord(TITLE_EDIT, updaterId, currentTime(), reason, null,
                 null, editedTitle, unEditedTitle, null, null);
     }
 
@@ -96,7 +94,7 @@ public class QuestionUpdatedRecord {
      * @return 更新问题详情时的问题记录
      */
     public static QuestionUpdatedRecord ofDetailEdited(String updaterId, String editedDetail, String unEditedDetail, String reason) {
-        return new QuestionUpdatedRecord(DETAIL_EDIT, updaterId, LocalDateTime.now(), reason, null,
+        return new QuestionUpdatedRecord(DETAIL_EDIT, updaterId, currentTime(), reason, null,
                 null, null, null, editedDetail, unEditedDetail);
     }
 
@@ -109,10 +107,9 @@ public class QuestionUpdatedRecord {
             return false;
         }
         QuestionUpdatedRecord that = (QuestionUpdatedRecord) o;
-        var formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return updateType == that.updateType
                 && Objects.equals(updaterId, that.updaterId)
-                && updatedAt.format(formatter).equals(that.updatedAt.format(formatter))
+                && Objects.equals(updatedAt, that.updatedAt)
                 && Objects.equals(reason, that.reason)
                 && Objects.equals(createTitle, that.createTitle)
                 && Objects.equals(createDetail, that.createDetail)
