@@ -1,13 +1,14 @@
 package com.zhihu.question.domain.repository;
 
 import com.zhihu.question.core.JpaRepositoryTest;
-import com.zhihu.question.domain.model.Question;
+import com.zhihu.question.domain.model.entity.Question;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
@@ -41,7 +42,16 @@ class QuestionRepositoryTest {
         entityManager.detach(savedQuestion);
         var queryQuestion = questionRepository.findById(savedQuestion.getId())
                 .orElseThrow(AssertionError::new);
-        assertThat(queryQuestion.equals(savedQuestion), is(true));
-    }
+        assertThat(savedQuestion, equalTo(queryQuestion));
 
+        savedQuestion.editDetail("UID_00001", "a new detail for test", "for test edit detail");
+        savedQuestion = questionRepository.saveAndFlush(savedQuestion);
+        entityManager.detach(savedQuestion);
+        assertThat(savedQuestion, equalTo(queryQuestion));
+
+        savedQuestion.editTitle("UID_00002", "a new title for test", "for test edit title");
+        savedQuestion = questionRepository.saveAndFlush(savedQuestion);
+        entityManager.detach(savedQuestion);
+        assertThat(savedQuestion, equalTo(queryQuestion));
+    }
 }
