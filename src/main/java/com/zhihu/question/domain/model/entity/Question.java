@@ -1,7 +1,11 @@
 package com.zhihu.question.domain.model.entity;
 
-import com.zhihu.question.domain.model.vo.QuestionUpdatedRecord;
-import org.springframework.data.annotation.PersistenceConstructor;
+import static javax.persistence.GenerationType.IDENTITY;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
@@ -9,12 +13,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OrderBy;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
 
-import static javax.persistence.GenerationType.IDENTITY;
+import org.springframework.data.annotation.PersistenceConstructor;
+
+import com.zhihu.question.domain.model.vo.QuestionUpdatedRecord;
 
 /**
  * @author admin
@@ -35,8 +37,7 @@ public class Question {
     private List<QuestionUpdatedRecord> updatedRecords;
 
     @PersistenceConstructor
-    protected Question() {
-    }
+    protected Question() {}
 
     public Question(String questionerId, String title, String detail) {
         this.questionerId = questionerId;
@@ -104,12 +105,10 @@ public class Question {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Question question = (Question) o;
+        Question question = (Question)o;
 
-        if (!(Objects.equals(id, question.id)
-                && Objects.equals(questionerId, question.questionerId)
-                && Objects.equals(title, question.title)
-                && Objects.equals(detail, question.detail))) {
+        if (!(Objects.equals(id, question.id) && Objects.equals(questionerId, question.questionerId)
+            && Objects.equals(title, question.title) && Objects.equals(detail, question.detail))) {
             return false;
         }
         if (updatedRecords.size() != question.updatedRecords.size()) {
@@ -130,14 +129,7 @@ public class Question {
 
     @Override
     public String toString() {
-        return "Question{"
-                + "id=" + id
-                + ", questionerId='" + questionerId + '\''
-                + ", title='" + title + '\''
-                + ", detail='" + detail + '\''
-                + ", updatedRecords=" + updatedRecords
-                + '}';
+        return "Question{" + "id=" + id + ", questionerId='" + questionerId + '\'' + ", title='" + title + '\''
+            + ", detail='" + detail + '\'' + ", updatedRecords=" + updatedRecords + '}';
     }
 }
-
-

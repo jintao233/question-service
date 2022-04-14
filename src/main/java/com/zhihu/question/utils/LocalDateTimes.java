@@ -10,8 +10,7 @@ import java.time.temporal.ChronoUnit;
 public interface LocalDateTimes {
 
     /**
-     * LocalDateTime截取，精确到MILLIS
-     * 该精度需要同数据库脚本的字段值对应[mysql:dateTime(3)]
+     * LocalDateTime截取,精确到MILLIS 该精度需要同数据库脚本的字段值对应 mysql:dateTime(3)
      *
      * @return LocalDateTime
      */

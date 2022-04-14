@@ -1,14 +1,15 @@
 package com.zhihu.question.rest;
 
-import com.zhihu.question.domain.application.QuestionApplicationService;
-import com.zhihu.question.domain.application.command.CreateQuestionCommand;
-import com.zhihu.question.rest.request.CreateQuestionRequest;
-import com.zhihu.question.rest.response.CreateQuestionResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.zhihu.question.domain.application.QuestionApplicationService;
+import com.zhihu.question.domain.application.command.CreateQuestionCommand;
+import com.zhihu.question.rest.request.CreateQuestionRequest;
+import com.zhihu.question.rest.response.CreateQuestionResponse;
 
 /**
  * @author admin

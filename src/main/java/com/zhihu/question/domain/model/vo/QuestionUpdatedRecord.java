@@ -1,17 +1,18 @@
 package com.zhihu.question.domain.model.vo;
 
-import org.springframework.data.annotation.PersistenceConstructor;
-
-import javax.persistence.Embeddable;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import java.time.LocalDateTime;
-import java.util.Objects;
-
 import static com.zhihu.question.domain.model.vo.QuestionUpdatedRecord.UpdateType.CREATED;
 import static com.zhihu.question.domain.model.vo.QuestionUpdatedRecord.UpdateType.DETAIL_EDIT;
 import static com.zhihu.question.domain.model.vo.QuestionUpdatedRecord.UpdateType.TITLE_EDIT;
 import static com.zhihu.question.utils.LocalDateTimes.currentTime;
+
+import java.time.LocalDateTime;
+import java.util.Objects;
+
+import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
+import org.springframework.data.annotation.PersistenceConstructor;
 
 /**
  * @author admin
@@ -36,11 +37,9 @@ public class QuestionUpdatedRecord {
     private String editedDetail;
     private String unEditedDetail;
 
-    private QuestionUpdatedRecord(UpdateType updateType, String updaterId,
-                                  LocalDateTime updatedAt, String reason,
-                                  String createTitle, String createDetail,
-                                  String editedTitle, String unEditedTitle,
-                                  String editedDetail, String unEditedDetail) {
+    private QuestionUpdatedRecord(UpdateType updateType, String updaterId, LocalDateTime updatedAt, String reason,
+        String createTitle, String createDetail, String editedTitle, String unEditedTitle, String editedDetail,
+        String unEditedDetail) {
         this.updateType = updateType;
         this.updaterId = updaterId;
         this.updatedAt = updatedAt;
@@ -54,48 +53,49 @@ public class QuestionUpdatedRecord {
     }
 
     @PersistenceConstructor
-    protected QuestionUpdatedRecord() {
-    }
+    protected QuestionUpdatedRecord() {}
 
     /**
      * 创建问题时的记录信息
      *
-     * @param updaterId    问题的创建人
-     * @param createTitle  问题的标题
+     * @param updaterId 问题的创建人
+     * @param createTitle 问题的标题
      * @param createDetail 问题的详情
      * @return 创建问题时的记录对象
      */
     public static QuestionUpdatedRecord ofCreated(String updaterId, String createTitle, String createDetail) {
-        return new QuestionUpdatedRecord(CREATED, updaterId, currentTime(), null, createTitle,
-                createDetail, null, null, null, null);
+        return new QuestionUpdatedRecord(CREATED, updaterId, currentTime(), null, createTitle, createDetail, null, null,
+            null, null);
     }
 
     /**
      * 更新问题的标题时的记录
      *
-     * @param updaterId     更新人
-     * @param editedTitle   更新后的标题
+     * @param updaterId 更新人
+     * @param editedTitle 更新后的标题
      * @param unEditedTitle 更新前的标题
-     * @param reason        更新的原因
+     * @param reason 更新的原因
      * @return 更新问题标题时的问题记录
      */
-    public static QuestionUpdatedRecord ofTitleEdited(String updaterId, String editedTitle, String unEditedTitle, String reason) {
-        return new QuestionUpdatedRecord(TITLE_EDIT, updaterId, currentTime(), reason, null,
-                null, editedTitle, unEditedTitle, null, null);
+    public static QuestionUpdatedRecord ofTitleEdited(String updaterId, String editedTitle, String unEditedTitle,
+        String reason) {
+        return new QuestionUpdatedRecord(TITLE_EDIT, updaterId, currentTime(), reason, null, null, editedTitle,
+            unEditedTitle, null, null);
     }
 
     /**
      * 更新问题的详情时的记录
      *
-     * @param updaterId      更新人
-     * @param editedDetail   更新后的标题
+     * @param updaterId 更新人
+     * @param editedDetail 更新后的标题
      * @param unEditedDetail 更新前的标题
-     * @param reason         更新的原因
+     * @param reason 更新的原因
      * @return 更新问题详情时的问题记录
      */
-    public static QuestionUpdatedRecord ofDetailEdited(String updaterId, String editedDetail, String unEditedDetail, String reason) {
-        return new QuestionUpdatedRecord(DETAIL_EDIT, updaterId, currentTime(), reason, null,
-                null, null, null, editedDetail, unEditedDetail);
+    public static QuestionUpdatedRecord ofDetailEdited(String updaterId, String editedDetail, String unEditedDetail,
+        String reason) {
+        return new QuestionUpdatedRecord(DETAIL_EDIT, updaterId, currentTime(), reason, null, null, null, null,
+            editedDetail, unEditedDetail);
     }
 
     @Override
@@ -106,39 +106,27 @@ public class QuestionUpdatedRecord {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        QuestionUpdatedRecord that = (QuestionUpdatedRecord) o;
-        return updateType == that.updateType
-                && Objects.equals(updaterId, that.updaterId)
-                && Objects.equals(updatedAt, that.updatedAt)
-                && Objects.equals(reason, that.reason)
-                && Objects.equals(createTitle, that.createTitle)
-                && Objects.equals(createDetail, that.createDetail)
-                && Objects.equals(editedTitle, that.editedTitle)
-                && Objects.equals(unEditedTitle, that.unEditedTitle)
-                && Objects.equals(editedDetail, that.editedDetail)
-                && Objects.equals(unEditedDetail, that.unEditedDetail);
+        QuestionUpdatedRecord that = (QuestionUpdatedRecord)o;
+        return updateType == that.updateType && Objects.equals(updaterId, that.updaterId)
+            && Objects.equals(updatedAt, that.updatedAt) && Objects.equals(reason, that.reason)
+            && Objects.equals(createTitle, that.createTitle) && Objects.equals(createDetail, that.createDetail)
+            && Objects.equals(editedTitle, that.editedTitle) && Objects.equals(unEditedTitle, that.unEditedTitle)
+            && Objects.equals(editedDetail, that.editedDetail) && Objects.equals(unEditedDetail, that.unEditedDetail);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(updateType, updaterId, reason, createTitle, createDetail,
-                editedTitle, unEditedTitle, editedDetail, unEditedDetail);
+        return Objects.hash(updateType, updaterId, reason, createTitle, createDetail, editedTitle, unEditedTitle,
+            editedDetail, unEditedDetail);
     }
 
     @Override
     public String toString() {
-        return "QuestionUpdatedRecord{"
-                + "updateType=" + updateType
-                + ", updaterId='" + updaterId + '\''
-                + ", updatedAt=" + updatedAt
-                + ", reason='" + reason + '\''
-                + ", createTitle='" + createTitle + '\''
-                + ", createDetail='" + createDetail + '\''
-                + ", editedTitle='" + editedTitle + '\''
-                + ", unEditedTitle='" + unEditedTitle + '\''
-                + ", editedDetail='" + editedDetail + '\''
-                + ", unEditedDetail='" + unEditedDetail + '\''
-                + '}';
+        return "QuestionUpdatedRecord{" + "updateType=" + updateType + ", updaterId='" + updaterId + '\''
+            + ", updatedAt=" + updatedAt + ", reason='" + reason + '\'' + ", createTitle='" + createTitle + '\''
+            + ", createDetail='" + createDetail + '\'' + ", editedTitle='" + editedTitle + '\'' + ", unEditedTitle='"
+            + unEditedTitle + '\'' + ", editedDetail='" + editedDetail + '\'' + ", unEditedDetail='" + unEditedDetail
+            + '\'' + '}';
     }
 
     public UpdateType getUpdateType() {

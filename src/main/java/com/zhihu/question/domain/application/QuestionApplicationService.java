@@ -1,13 +1,13 @@
 package com.zhihu.question.domain.application;
 
-import com.zhihu.question.domain.application.command.CreateQuestionCommand;
-import com.zhihu.question.domain.application.result.QuestionCreatedResult;
-import com.zhihu.question.domain.model.entity.Question;
-import com.zhihu.question.domain.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhihu.question.domain.application.command.CreateQuestionCommand;
+import com.zhihu.question.domain.application.result.QuestionCreatedResult;
+import com.zhihu.question.domain.model.entity.Question;
+import com.zhihu.question.domain.repository.QuestionRepository;
 
 /**
  * @author admin
