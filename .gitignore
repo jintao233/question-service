@@ -1,0 +1,19 @@
+##Macos
+.DS_Store
+*/**/.DS_Store
+
+### Idea
+.idea
+*.iml
+*.ipr
+/out
+
+### Gradle
+/.gradle
+/gradle
+/build
+
+### Environment Configuration
+application-*.yml
+!application-env.template.yml
+!/.githooks
